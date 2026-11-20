@@ -163,20 +163,32 @@ dialog::backdrop{background:rgba(18,13,9,.62);backdrop-filter:blur(3px)}
 .racik h2{color:#f6ead9}
 .cupbox{display:grid;place-items:center}
 .cupbox svg{width:min(260px,70%);height:auto;overflow:visible}
-.cupbox rect{transition:y .6s cubic-bezier(.3,.9,.3,1),height .6s cubic-bezier(.3,.9,.3,1),fill .5s ease}
+.cupbox rect{transition:y .32s cubic-bezier(.22,1,.36,1),height .32s cubic-bezier(.22,1,.36,1),fill .28s ease}
+.cupbox.dragging rect{transition:none}
 .steam path{fill:none;stroke:#f6ead9;stroke-width:4;stroke-linecap:round;opacity:0;animation:steam 3.2s ease-in-out infinite}
 .steam path:nth-child(2){animation-delay:.8s}.steam path:nth-child(3){animation-delay:1.6s}
 @keyframes steam{0%{opacity:0;transform:translateY(10px)}35%{opacity:.5}100%{opacity:0;transform:translateY(-14px)}}
-.sl{display:grid;gap:4px;margin-bottom:14px}
-.sl b{display:flex;justify-content:space-between;font-weight:700}
-.sl output{color:#e0b283}
-input[type=range]{accent-color:#d49a67;padding:0;min-height:36px;border:0;background:transparent}
-.res{background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;margin:6px 0 16px}
+.sl{display:grid;gap:6px;margin-bottom:16px}
+.sl b{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.sl output{color:#e0b283;font-variant-numeric:tabular-nums;transition:transform .18s ease}
+.racik input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:34px;padding:0;margin:0;border:0;background:transparent;cursor:pointer;touch-action:pan-y;-webkit-tap-highlight-color:transparent}
+.racik input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:999px;background:linear-gradient(90deg,#d49a67 var(--p,50%),rgba(255,255,255,.16) var(--p,50%))}
+.racik input[type=range]::-moz-range-track{height:8px;border-radius:999px;background:rgba(255,255,255,.16)}
+.racik input[type=range]::-moz-range-progress{height:8px;border-radius:999px;background:#d49a67}
+.racik input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;margin-top:-7px;border-radius:50%;background:#fff7ec;border:3px solid #d49a67;box-shadow:0 2px 8px rgba(0,0,0,.35);transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease}
+.racik input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff7ec;border:3px solid #d49a67;box-shadow:0 2px 8px rgba(0,0,0,.35);transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease}
+@media(hover:hover){
+ .racik input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.15);box-shadow:0 0 0 6px rgba(212,154,103,.24),0 4px 10px rgba(0,0,0,.4)}
+ .racik input[type=range]:hover::-moz-range-thumb{transform:scale(1.15);box-shadow:0 0 0 6px rgba(212,154,103,.24),0 4px 10px rgba(0,0,0,.4)}
+}
+.racik input[type=range]:active::-webkit-slider-thumb{transform:scale(1.24);box-shadow:0 0 0 9px rgba(212,154,103,.32),0 4px 12px rgba(0,0,0,.45)}
+.racik input[type=range]:active::-moz-range-thumb{transform:scale(1.24);box-shadow:0 0 0 9px rgba(212,154,103,.32),0 4px 12px rgba(0,0,0,.45)}
+.res{background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;margin:6px 0 16px;transition:background-color .25s ease,transform .25s ease}
 .res h3{font-size:1.4rem;margin-bottom:2px}
 .res p{margin:0 0 6px;color:#d9c7b0;font-size:.95rem}
 .res .price{color:#e0b283}
 .racik .btn{background:#d49a67;border-color:#d49a67;color:#2a1d14}
-@media(prefers-reduced-motion:reduce){.steam path{animation:none;opacity:.3}.cupbox rect{transition:none}}
+@media(prefers-reduced-motion:reduce){.steam path{animation:none;opacity:.3}.cupbox rect,.racik input[type=range]::-webkit-slider-thumb,.racik input[type=range]::-moz-range-thumb{transition:none}}
 /* facilities */
 .fac{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
 @media(min-width:820px){.fac{grid-template-columns:repeat(4,1fr)}}
@@ -297,7 +309,7 @@ footer{padding:28px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
 </div></section>
 
 <section id="racik" style="padding-bottom:0"><div class="wrap"><div class="racik">
- <div class="cupbox" aria-hidden="true">
+ <div class="cupbox" id="cupBox" aria-hidden="true">
   <svg viewBox="0 0 200 230">
    <defs><clipPath id="cup"><path d="M46 80h108l-10 100q-3 14-18 14H74q-15 0-18-14z"/></clipPath></defs>
    <g class="steam"><path d="M80 62q-10-14 0-26t0-24"/><path d="M100 62q-10-14 0-26t0-24"/><path d="M120 62q-10-14 0-26t0-24"/></g>
@@ -314,9 +326,9 @@ footer{padding:28px 0 36px;border-top:1px solid var(--line);color:var(--muted);f
  <div>
   <h2>Racik Kopimu</h2>
   <p style="color:#d9c7b0">Geser untuk meracik. Kami carikan menu yang paling pas.</p>
-  <div class="sl"><b><label for="rK">Kekuatan kopi</label><output id="oK"></output></b><input id="rK" type="range" min="1" max="3" value="2"></div>
-  <div class="sl"><b><label for="rS">Susu</label><output id="oS"></output></b><input id="rS" type="range" min="0" max="3" value="1"></div>
-  <div class="sl"><b><label for="rM">Manis</label><output id="oM"></output></b><input id="rM" type="range" min="0" max="3" value="1"></div>
+  <div class="sl"><b><label for="rK">Kekuatan kopi</label><output id="oK"></output></b><input id="rK" type="range" min="1" max="3" step="0.01" value="2"></div>
+  <div class="sl"><b><label for="rS">Susu</label><output id="oS"></output></b><input id="rS" type="range" min="0" max="3" step="0.01" value="1"></div>
+  <div class="sl"><b><label for="rM">Manis</label><output id="oM"></output></b><input id="rM" type="range" min="0" max="3" step="0.01" value="1"></div>
   <div class="res" aria-live="polite"><h3 id="rN"></h3><p id="rD"></p><span class="price" id="rP"></span></div>
   <button class="btn" id="rGo" type="button">Pesan racikan ini</button>
  </div>
@@ -752,26 +764,75 @@ document.addEventListener("pointerdown",function(e){
  b.appendChild(p);setTimeout(function(){p.remove()},600);
 });
 
-/* racik kopimu */
+/* racik kopimu – slider kontinu & magnetic snap */
 (function(){
- var K=["Ringan","Sedang","Pekat"],S=["Tanpa susu","Sedikit","Banyak","Creamy"],M=["Tanpa gula","Manis tipis","Manis","Sangat manis"],C=["#9a6a3f","#5a3820","#2a170c"];
- var rK=$("#rK"),rS=$("#rS"),rM=$("#rM"),cur=null;
- function pick(k,s,m){var n=s==0?(k==3?"Espresso":k==2?"Americano":"V60 Gayo"):(m>=2?"Kopi Susu Aren":"Cafe Latte");return MENU.filter(function(x){return x.n===n})[0]}
+ var K=["Ringan","Sedang","Pekat"],S=["Tanpa susu","Sedikit","Banyak","Creamy"],M=["Tanpa gula","Manis tipis","Manis","Sangat manis"];
+ var C=[[154,106,63],[90,56,32],[42,23,12]];
+ var rK=$("#rK"),rS=$("#rS"),rM=$("#rM"),cup=$("#cupBox"),cur=null,rafMap={};
+
+ function mixColor(v){
+  var i=v<2?0:1,t=v-1-i,a=C[i],b=C[i+1];
+  return "rgb("+Math.round(a[0]+(b[0]-a[0])*t)+","+Math.round(a[1]+(b[1]-a[1])*t)+","+Math.round(a[2]+(b[2]-a[2])*t)+")";
+ }
+ function setFill(el){
+  var min=+el.min,max=+el.max,pct=((+el.value-min)/(max-min))*100;
+  el.style.setProperty("--p",pct.toFixed(2)+"%");
+ }
+ function pick(k,s,m){
+  var n=s===0?(k===3?"Espresso":k===2?"Americano":"V60 Gayo"):(m>=2?"Kopi Susu Aren":"Cafe Latte");
+  return MENU.filter(function(x){return x.n===n})[0];
+ }
  function upd(){
-  var k=+rK.value,s=+rS.value,m=+rM.value,H=110,B=190,car=m*7,mil=Math.round(s*.22*H),cof=H-car-mil;
-  $("#lCar").setAttribute("height",car);$("#lCar").setAttribute("y",B-car);
-  $("#lCof").setAttribute("height",cof);$("#lCof").setAttribute("y",B-car-cof);
+  var k=+rK.value,s=+rS.value,m=+rM.value;
+  var ki=Math.round(k),si=Math.round(s),mi=Math.round(m);
+  setFill(rK);setFill(rS);setFill(rM);
+
+  var H=110,B=190,car=+(m*7).toFixed(2),mil=+(s*.22*H).toFixed(2),cof=+(H-car-mil).toFixed(2);
+  $("#lCar").setAttribute("height",car);$("#lCar").setAttribute("y",(B-car).toFixed(2));
+  $("#lCof").setAttribute("height",cof);$("#lCof").setAttribute("y",(B-car-cof).toFixed(2));
   $("#lMil").setAttribute("height",mil);$("#lMil").setAttribute("y",80);
   $("#lCar").style.height=car+"px";$("#lCar").style.y=(B-car)+"px";
   $("#lCof").style.height=cof+"px";$("#lCof").style.y=(B-car-cof)+"px";
-  $("#lMil").style.height=mil+"px";$("#lMil").style.y=(80)+"px";
-  $("#lCof").setAttribute("fill",C[k-1]);
-  $("#oK").textContent=K[k-1];$("#oS").textContent=S[s];$("#oM").textContent=M[m];
-  cur=pick(k,s,m);
+  $("#lMil").style.height=mil+"px";$("#lMil").style.y="80px";
+  $("#lCof").setAttribute("fill",mixColor(k));
+
+  $("#oK").textContent=K[ki-1];$("#oS").textContent=S[si];$("#oM").textContent=M[mi];
+  cur=pick(ki,si,mi);
   $("#rN").textContent=cur.n;$("#rD").textContent=cur.d;$("#rP").textContent=rp(cur.h);
-  cur.pref="kopi "+K[k-1].toLowerCase()+", susu: "+S[s].toLowerCase()+", gula: "+M[m].toLowerCase();
+  cur.pref="kopi "+K[ki-1].toLowerCase()+", susu: "+S[si].toLowerCase()+", gula: "+M[mi].toLowerCase();
  }
- [rK,rS,rM].forEach(function(i){i.oninput=upd});upd();
+ function glideTo(el,target){
+  cancelAnimationFrame(rafMap[el.id]);
+  var start=+el.value,diff=target-start;
+  if(Math.abs(diff)<0.005){el.value=target;upd();return}
+  var t0=performance.now(),dur=220;
+  function step(now){
+   var p=Math.min((now-t0)/dur,1),ease=1-Math.pow(1-p,3);
+   el.value=(start+diff*ease).toFixed(3);
+   upd();
+   if(p<1)rafMap[el.id]=requestAnimationFrame(step);
+   else{el.value=target;upd()}
+  }
+  rafMap[el.id]=requestAnimationFrame(step);
+ }
+
+ [rK,rS,rM].forEach(function(el){
+  el.addEventListener("pointerdown",function(){cancelAnimationFrame(rafMap[el.id]);cup.classList.add("dragging")});
+  el.addEventListener("input",upd);
+  el.addEventListener("change",function(){cup.classList.remove("dragging");glideTo(el,Math.round(+el.value))});
+  el.addEventListener("keydown",function(e){
+   if(e.key==="ArrowLeft"||e.key==="ArrowDown"||e.key==="ArrowRight"||e.key==="ArrowUp"){
+    e.preventDefault();
+    var dir=(e.key==="ArrowRight"||e.key==="ArrowUp")?1:-1;
+    var next=Math.max(+el.min,Math.min(+el.max,Math.round(+el.value)+dir));
+    cup.classList.remove("dragging");
+    glideTo(el,next);
+   }
+  });
+ });
+ window.addEventListener("pointerup",function(){cup.classList.remove("dragging")});
+ upd();
+
  $("#rGo").onclick=function(){
   addItem(cur.n,cur.h,cur.pref,1);
   $("#pesan").scrollIntoView({behavior:"smooth"});
