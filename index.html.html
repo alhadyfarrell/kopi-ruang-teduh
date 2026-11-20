@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kopi Ruang Teduh – Seduhan Lokal untuk Hari yang Lebih Tenang</title>
+<meta name="description" content="Kedai kopi dengan biji lokal Gayo, Toraja, dan Kintamani. Menu lengkap, fasilitas, reservasi, dan pesan kopi literan via WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4ebdf;--surface:#fbf6ee;--ink:#2a2119;--muted:#6f6154;--wood:#6b4a32;--accent:#a8693a;--on-accent:#fff;--line:#e0d2bf;--hero-ov:rgba(31,24,18,.55);
+--serif:'Fraunces',Georgia,serif;--sans:'Nunito Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1814;--surface:#27201a;--ink:#f1e6d6;--muted:#b3a290;--wood:#d1a27a;--accent:#d49a67;--on-accent:#1d1814;--line:#3a3028;--hero-ov:rgba(18,13,9,.62);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1814;--surface:#27201a;--ink:#f1e6d6;--muted:#b3a290;--wood:#d1a27a;--accent:#d49a67;--on-accent:#1d1814;--line:#3a3028;--hero-ov:rgba(18,13,9,.62);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:var(--serif);line-height:1.15;margin:0}
+h2{font-size:clamp(1.8rem,6vw,2.5rem);color:var(--wood);margin-bottom:.6rem}
+p{margin:0 0 1rem}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+section{padding:64px 0}
+.lead{color:var(--muted);max-width:60ch}
+.btn,.chip,.icon-btn,nav a,#drawer a,.qbtn,.opt,.seg-btn{position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.btn,.chip,.icon-btn,.qbtn,.opt,.seg-btn{transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:999px;border:2px solid var(--accent);background:var(--accent);color:var(--on-accent);font:700 1rem var(--sans);text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+@media(hover:hover){.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(107,74,50,.35)}.btn.ghost:hover{background:rgba(255,255,255,.14)}.chip:hover{border-color:var(--accent);transform:translateY(-1px)}.icon-btn:hover{border-color:var(--accent);transform:rotate(12deg) scale(1.06)}}
+.btn:active,.chip:active,.icon-btn:active,.qbtn:active,.opt:active,.seg-btn:active{transform:scale(.96);box-shadow:none}
+.rip{position:absolute;border-radius:50%;background:currentColor;opacity:.28;transform:scale(0);animation:rip .55s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+/* nav */
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px);transition:box-shadow .25s ease}
+header.scrolled{box-shadow:0 6px 20px rgba(31,24,18,.08)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.bar{display:flex;align-items:center;gap:8px;height:64px}
+.logo{font:700 1.15rem var(--serif);text-decoration:none;color:var(--wood);margin-right:auto;display:flex;align-items:center;gap:8px;transition:transform .2s ease}
+.logo:hover{transform:translateY(-1px)}
+.logo img{height:34px;width:auto}
+nav{display:none}
+.nav-pill{position:absolute;top:4px;bottom:4px;left:0;border-radius:999px;background:var(--wood);opacity:0;pointer-events:none;transition:transform .34s cubic-bezier(.22,1,.36,1),width .34s cubic-bezier(.22,1,.36,1),opacity .2s ease}
+nav a{z-index:1;padding:7px 15px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--muted);transition:color .22s ease,transform .16s ease}
+nav a.is-lit{color:var(--bg)}
+nav a:active{transform:scale(.94)}
+.icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.15rem;cursor:pointer}
+#menuBtn{display:inline-block}
+#drawer{display:none;border-top:1px solid var(--line);background:var(--bg)}
+#drawer.open{display:block}
+#drawer a{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;text-decoration:none;font-weight:600;border-bottom:1px solid var(--line);color:var(--ink);transition:background-color .2s ease,padding-left .22s ease,color .2s ease}
+#drawer a::after{content:"→";color:var(--accent);opacity:.65;transition:transform .22s ease,opacity .22s ease}
+#drawer a:hover,#drawer a:active{background:var(--surface);padding-left:26px}
+#drawer a:hover::after,#drawer a:active::after{transform:translateX(4px);opacity:1}
+#drawer a[aria-current="location"]{background:var(--surface);color:var(--wood);box-shadow:inset 4px 0 0 var(--accent)}
+#drawer.open a{animation:drawerIn .28s cubic-bezier(.22,1,.36,1) both}
+#drawer.open a:nth-child(2){animation-delay:.04s}
+#drawer.open a:nth-child(3){animation-delay:.08s}
+#drawer.open a:nth-child(4){animation-delay:.12s}
+#drawer.open a:nth-child(5){animation-delay:.16s}
+@keyframes drawerIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@media(min-width:820px){nav{display:flex;position:relative;align-items:center;gap:2px;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}#menuBtn,#drawer{display:none!important}}
+/* hero */
+.hero{position:relative;min-height:calc(100svh - 64px);display:flex;align-items:flex-end;color:#fff7ec;padding:0;
+background:linear-gradient(var(--hero-ov),var(--hero-ov)),var(--hero-img,none),linear-gradient(160deg,#6b4a32,#2a1d14);background-size:cover;background-position:center}
+.hero .wrap{width:100%;padding-bottom:56px;padding-top:204px}
+@media(min-width:820px){.hero .wrap{padding-top:80px;padding-right:250px}}
+.hero h1{font-size:clamp(2.4rem,10vw,4.6rem);max-width:14ch;margin-bottom:1rem}
+.hero p{font-size:1.1rem;max-width:44ch;opacity:.92}
+.hero .btn.ghost{color:#fff7ec}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+/* cangkir Ngopi Yuk */
+.ngopi{position:absolute;z-index:2;right:14px;top:18px;width:132px;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#fff7ec;-webkit-tap-highlight-color:transparent;cursor:pointer;transform:perspective(600px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));transition:transform .25s ease}
+@media(min-width:820px){.ngopi{width:210px;right:max(20px,calc((100% - 1040px)/2 + 20px));top:auto;bottom:64px}}
+.ngopi:hover,.ngopi:focus-visible{--s:1.08}
+.ngopi:active{--s:.94}
+.bubble{position:relative;margin-bottom:12px;padding:6px 16px;border-radius:999px;background:#fff7ec;color:#2a1d14;font:700 1.05rem var(--serif);white-space:nowrap;animation:bob 2.6s ease-in-out infinite;transition:background-color .2s}
+@media(min-width:820px){.bubble{font-size:1.45rem;padding:8px 22px}}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-7px;width:14px;height:14px;background:inherit;transform:translateX(-50%) rotate(45deg);border-radius:2px}
+.ngopi:hover .bubble,.ngopi:focus-visible .bubble{background:#e0b283}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.ngopi svg{width:100%;height:auto;overflow:visible}
+.cupg{transform-box:fill-box;transform-origin:50% 90%;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.ngopi:hover .cupg,.ngopi:focus-visible .cupg{transform:rotate(-7deg)}
+.ngopi.go .cupg{transform:rotate(-26deg) translateY(-4px)}
+.ngopi:hover .steam path{animation-duration:1.7s}
+.eye{transform-box:fill-box;transform-origin:center;animation:blink 4s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@media(prefers-reduced-motion:reduce){.bubble,.eye{animation:none}.ngopi,.cupg{transition:none}}
+/* tombol hero */
+.hero .btn{min-height:54px;padding:0 28px;font-size:1.05rem;transform:translate(var(--mx,0px),var(--my,0px)) scale(var(--s,1))}
+.hero .btn:hover{--s:1.05}
+.hero .btn:active{--s:.95}
+.hero .btn:not(.ghost){animation:ring 2.8s ease-out 1.6s infinite}
+.hero .btn:not(.ghost):hover,.hero .btn:not(.ghost):focus-visible{animation:none}
+.hero .btn:not(.ghost)::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-130%);transition:transform .7s ease;pointer-events:none}
+.hero .btn:not(.ghost):hover::after{transform:translateX(130%)}
+.hero .btn.ghost{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.hero .btn.ghost:hover{background:#fff7ec;color:#2a1d14;border-color:#fff7ec}
+.btn-ic{display:inline-block;margin-right:10px;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.hero .btn:hover .btn-ic{transform:rotate(-16deg) scale(1.25)}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(212,154,103,.65)}70%,100%{box-shadow:0 0 0 16px rgba(212,154,103,0)}}
+@media(max-width:480px){.cta{flex-direction:column}.hero .btn{width:100%;min-height:56px}}
+@media(prefers-reduced-motion:reduce){.hero .btn{animation:none!important;transition:none!important}.hero .btn::after,.btn-ic{transition:none!important}}
+/* about */
+.about{display:grid;gap:28px}
+.beans{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+.beans li{border:1px solid var(--line);background:var(--surface);padding:8px 16px;border-radius:999px;font-weight:600}
+@media(min-width:820px){.about{grid-template-columns:1.2fr 1fr;align-items:center}}
+/* menu interaktif */
+.filters{display:flex;gap:8px;overflow-x:auto;padding:4px 0 14px;margin:18px -20px 8px;padding-inline:20px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:600 .95rem var(--sans);cursor:pointer}
+.chip .cnt{font-size:.78rem;padding:2px 8px;border-radius:999px;background:var(--surface);color:var(--muted);transition:background-color .2s,color .2s}
+.chip[aria-pressed="true"]{background:var(--wood);color:var(--bg);border-color:var(--wood);box-shadow:0 6px 14px rgba(107,74,50,.22)}
+.chip[aria-pressed="true"] .cnt{background:rgba(255,255,255,.22);color:inherit}
+#grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:560px){#grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){#grid{grid-template-columns:repeat(3,1fr)}}
+.item{display:flex;gap:14px;background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;animation:pop .34s cubic-bezier(.22,1,.36,1) both;transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease,border-color .24s ease}
+@media(hover:hover){.item:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 12px 24px rgba(42,33,25,.1)}.item:hover .thumb{transform:scale(1.05)}.item:hover .thumb img{transform:scale(1.08)}}
+.item.in-cart{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.thumb{flex:none;width:96px;height:96px;border-radius:12px;background:linear-gradient(135deg,var(--line),var(--surface));display:grid;place-items:center;font-size:2.1rem;overflow:hidden;transition:transform .28s ease}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.item-body{flex:1;min-width:0;display:flex;flex-direction:column}
+.item h3{font-size:1.08rem;margin-bottom:4px}
+.item p{font-size:.9rem;color:var(--muted);margin:0 0 10px;line-height:1.45}
+.item-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-weight:700;color:var(--accent);font-size:.98rem}
+.qbtn{min-height:36px;padding:0 13px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);font:700 .86rem var(--sans);cursor:pointer}
+@media(hover:hover){.qbtn:hover{background:var(--accent);color:var(--on-accent)}}
+.stepper{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1.5px solid var(--accent);border-radius:999px;padding:2px}
+.stepper button{width:30px;height:30px;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);font:700 1rem var(--sans);cursor:pointer;display:grid;place-items:center}
+.stepper span{min-width:22px;text-align:center;font-weight:700;font-size:.92rem}
+.cart-bar{display:none;margin-top:22px;padding:16px 20px;border-radius:16px;background:var(--bg);border:1.5px solid var(--accent);align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;animation:pop .25s ease both}
+.cart-bar.show{display:flex}
+.cart-bar small{display:block;color:var(--muted);font-size:.88rem}
+.note{font-size:.9rem;color:var(--muted);margin-top:18px}
+/* modal detail menu */
+dialog{border:1px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink);padding:0;width:min(460px,calc(100% - 28px));box-shadow:0 24px 48px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(18,13,9,.62);backdrop-filter:blur(3px)}
+.m-head{position:relative;height:180px;background:linear-gradient(135deg,var(--line),var(--bg));display:grid;place-items:center;font-size:4.2rem;overflow:hidden}
+.m-head img{width:100%;height:100%;object-fit:cover}
+.m-close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.1rem;cursor:pointer}
+.m-body{padding:20px 22px 24px}
+.m-tag{display:inline-block;font-size:.8rem;font-weight:700;color:var(--wood);background:var(--bg);border:1px solid var(--line);padding:3px 11px;border-radius:999px;margin-bottom:8px}
+.m-body h3{font-size:1.5rem;margin-bottom:6px}
+.m-opts{margin:14px 0;display:grid;gap:12px}
+.m-opts b{display:block;font-size:.9rem;margin-bottom:6px}
+.opt-row{display:flex;flex-wrap:wrap;gap:8px}
+.opt{min-height:38px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:600 .88rem var(--sans);cursor:pointer}
+.opt[aria-checked="true"]{background:var(--wood);color:var(--bg);border-color:var(--wood)}
+.m-act{display:flex;align-items:center;gap:12px;margin-top:18px}
+.m-act .btn{flex:1}
+.toast{position:fixed;left:50%;bottom:calc(78px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(16px);background:var(--wood);color:var(--bg);padding:10px 18px;border-radius:999px;font:600 .92rem var(--sans);box-shadow:0 8px 20px rgba(0,0,0,.25);opacity:0;pointer-events:none;z-index:25;transition:opacity .25s ease,transform .25s ease;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* racik */
+.racik{display:grid;gap:24px;background:#2a1d14;color:#f6ead9;border-radius:24px;padding:28px 20px;align-items:center}
+@media(min-width:820px){.racik{grid-template-columns:1fr 1fr;padding:44px}}
+.racik h2{color:#f6ead9}
+.cupbox{display:grid;place-items:center}
+.cupbox svg{width:min(260px,70%);height:auto;overflow:visible}
+.cupbox rect{transition:y .6s cubic-bezier(.3,.9,.3,1),height .6s cubic-bezier(.3,.9,.3,1),fill .5s ease}
+.steam path{fill:none;stroke:#f6ead9;stroke-width:4;stroke-linecap:round;opacity:0;animation:steam 3.2s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:.8s}.steam path:nth-child(3){animation-delay:1.6s}
+@keyframes steam{0%{opacity:0;transform:translateY(10px)}35%{opacity:.5}100%{opacity:0;transform:translateY(-14px)}}
+.sl{display:grid;gap:4px;margin-bottom:14px}
+.sl b{display:flex;justify-content:space-between;font-weight:700}
+.sl output{color:#e0b283}
+input[type=range]{accent-color:#d49a67;padding:0;min-height:36px;border:0;background:transparent}
+.res{background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;margin:6px 0 16px}
+.res h3{font-size:1.4rem;margin-bottom:2px}
+.res p{margin:0 0 6px;color:#d9c7b0;font-size:.95rem}
+.res .price{color:#e0b283}
+.racik .btn{background:#d49a67;border-color:#d49a67;color:#2a1d14}
+@media(prefers-reduced-motion:reduce){.steam path{animation:none;opacity:.3}.cupbox rect{transition:none}}
+/* facilities */
+.fac{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
+@media(min-width:820px){.fac{grid-template-columns:repeat(4,1fr)}}
+.fac div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;font-weight:600}
+.fac span{display:block;font-size:1.6rem;margin-bottom:4px}
+.gal{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:620px){.gal{grid-template-columns:1fr 1fr}}
+.ph{aspect-ratio:4/3;border-radius:14px;background:linear-gradient(150deg,var(--wood),#2a1d14);color:#fff7ec;display:flex;align-items:flex-end;padding:16px;font-weight:600;background-size:cover;background-position:center;overflow:hidden;position:relative}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph .cap{position:absolute;left:0;right:0;bottom:0;padding:36px 16px 14px;background:linear-gradient(to top,rgba(20,13,8,.82),rgba(20,13,8,0));color:#fff7ec;font-weight:600;line-height:1.35}
+/* form & segmented switcher */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;max-width:600px}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:5px;border-radius:14px;background:var(--bg);border:1.5px solid var(--line);margin-bottom:20px}
+.seg-ind{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 7px);border-radius:10px;background:var(--wood);transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.seg[data-active="reservasi"] .seg-ind{transform:translateX(calc(100% + 4px))}
+.seg-btn{z-index:1;min-height:46px;padding:8px 12px;border:0;border-radius:10px;background:transparent;color:var(--muted);font:700 .95rem var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.seg-btn[aria-selected="true"]{color:var(--bg)}
+.mode-panel{display:grid;gap:16px;animation:pop .26s ease both}
+.mode-panel[hidden]{display:none}
+.field-lbl{display:block;font-weight:600;font-size:.95rem;margin-bottom:6px}
+.guest-box{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg)}
+.guest-box .stepper{padding:4px;gap:8px}
+.guest-box .stepper button{width:36px;height:36px}
+.guest-box .stepper span{min-width:64px;font-size:.98rem}
+.row2{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:520px){.row2{grid-template-columns:1fr 1fr}}
+form{display:grid;gap:16px}
+label{display:grid;gap:6px;font-weight:600;font-size:.95rem}
+input,textarea{font:400 1rem var(--sans);min-height:48px;padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+textarea{min-height:92px;resize:vertical}
+.err{color:#b3261e;font-size:.9rem;min-height:1.2em}
+:root[data-theme="dark"] .err{color:#ff8a80}
+/* location */
+.loc{display:grid;gap:20px}
+@media(min-width:820px){.loc{grid-template-columns:1fr 1fr}}
+.loc dl{margin:0}.loc dt{font-weight:700;color:var(--wood);margin-top:12px}.loc dd{margin:0}
+footer{padding:28px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.chip,.icon-btn,.item,.thumb,.thumb img,.nav-pill,nav a,#drawer a,#drawer a::after,.qbtn,.opt,.toast,.seg-ind,.seg-btn,.mode-panel{transition:none!important;animation:none!important}.rip{display:none}}
+</style>
+</head>
+<body>
+<header id="hdr">
+ <div class="wrap bar">
+  <a class="logo" href="#atas" aria-label="Kopi Ruang Teduh">
+   <!-- Ganti dengan logo: <img src="logo.png" alt="Logo Kopi Ruang Teduh"> -->
+   ☕ Kopi Ruang Teduh
+  </a>
+  <nav id="nav" aria-label="Navigasi utama">
+   <span class="nav-pill" id="navPill" aria-hidden="true"></span>
+   <a href="#tentang">Tentang</a><a href="#menu">Menu</a><a href="#fasilitas">Fasilitas</a><a href="#pesan">Pesan</a><a href="#lokasi">Lokasi</a>
+  </nav>
+  <button class="icon-btn" id="theme" aria-label="Ganti mode terang atau gelap">🌙</button>
+  <button class="icon-btn" id="menuBtn" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="drawer">☰</button>
+ </div>
+ <div id="drawer">
+  <a href="#tentang">Tentang Kami</a><a href="#menu">Menu</a><a href="#fasilitas">Fasilitas &amp; Galeri</a><a href="#pesan">Pesan &amp; Reservasi</a><a href="#lokasi">Lokasi &amp; Jam Buka</a>
+ </div>
+</header>
+
+<main id="atas">
+<section class="hero" id="hero">
+ <a class="ngopi" id="ngopi" href="#menu" aria-label="Ngopi Yuk! Lihat daftar menu">
+  <span class="bubble">Ngopi Yuk!</span>
+  <svg viewBox="0 0 160 150" aria-hidden="true">
+   <g class="steam"><path d="M58 50q-9-12 0-22t0-20"/><path d="M78 50q-9-12 0-22t0-20"/><path d="M98 50q-9-12 0-22t0-20"/></g>
+   <ellipse cx="80" cy="138" rx="66" ry="9" fill="#e9d9c2"/>
+   <g class="cupg">
+    <path d="M126 72h6q20 0 20 19t-22 19h-8" fill="none" stroke="#fbf3e6" stroke-width="9" stroke-linecap="round"/>
+    <path d="M32 60h96l-8 58q-2 14-16 14H56q-14 0-16-14z" fill="#fbf3e6"/>
+    <ellipse cx="80" cy="60" rx="48" ry="9" fill="#3b2416" stroke="#fbf3e6" stroke-width="4"/>
+    <ellipse class="eye" cx="64" cy="92" rx="3.8" ry="4.6" fill="#3b2416"/>
+    <ellipse class="eye" cx="96" cy="92" rx="3.8" ry="4.6" fill="#3b2416"/>
+    <path d="M70 103q10 9 20 0" fill="none" stroke="#3b2416" stroke-width="3.5" stroke-linecap="round"/>
+    <ellipse cx="52" cy="102" rx="7" ry="4.5" fill="#e59a7a" opacity=".55"/>
+    <ellipse cx="108" cy="102" rx="7" ry="4.5" fill="#e59a7a" opacity=".55"/>
+   </g>
+  </svg>
+ </a>
+ <div class="wrap">
+  <h1>Seduhan Lokal untuk Hari yang Lebih Tenang</h1>
+  <p>Biji kopi pilihan nusantara, diseduh segar setiap hari. Tempat kerja yang nyaman, harga yang bersahabat.</p>
+  <div class="cta">
+   <a class="btn" href="#menu"><span class="btn-ic" aria-hidden="true">☕</span>Lihat Menu</a>
+   <a class="btn ghost" href="#pesan"><span class="btn-ic" aria-hidden="true">📅</span>Pesan atau Reservasi</a>
+  </div>
+ </div>
+</section>
+
+<section id="tentang"><div class="wrap about">
+ <div>
+  <h2>Tentang Kedai Kami</h2>
+  <p class="lead">Kopi Ruang Teduh lahir dari satu keinginan sederhana: menyediakan ruang yang tenang untuk bekerja, belajar, atau sekadar berhenti sebentar.</p>
+  <p class="lead">Kami memilih biji kopi dari petani lokal dan menyeduhnya segar setiap hari, dengan harga yang tetap terjangkau untuk anak kuliahan maupun pekerja kantoran.</p>
+ </div>
+ <div>
+  <h3 style="margin-bottom:12px">Biji kopi kami</h3>
+  <ul class="beans"><li>Gayo, Aceh</li><li>Toraja, Sulawesi</li><li>Kintamani, Bali</li></ul>
+ </div>
+</div></section>
+
+<section id="menu" style="background:var(--surface)"><div class="wrap">
+ <h2>Daftar Menu</h2>
+ <p class="lead">Ketuk kartu menu untuk atur penyajian, atau tekan <strong>+ Tambah</strong> untuk langsung masuk ke pesanan.</p>
+ <div class="filters" id="filters" role="group" aria-label="Filter kategori menu"></div>
+ <div id="grid" aria-live="polite"></div>
+ <div class="cart-bar" id="cartBar" aria-live="polite">
+  <div>
+   <strong id="cartCount">0 item dipilih</strong>
+   <small id="cartSub">Estimasi total: Rp0</small>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+   <button class="qbtn" id="cartReset" type="button">Reset</button>
+   <a class="btn" href="#pesan" style="min-height:42px;padding:0 18px;font-size:.92rem">Lanjut Pesan →</a>
+  </div>
+ </div>
+ <p class="note">Harga dalam rupiah. Ketersediaan menu dapat berubah.</p>
+</div></section>
+
+<section id="racik" style="padding-bottom:0"><div class="wrap"><div class="racik">
+ <div class="cupbox" aria-hidden="true">
+  <svg viewBox="0 0 200 230">
+   <defs><clipPath id="cup"><path d="M46 80h108l-10 100q-3 14-18 14H74q-15 0-18-14z"/></clipPath></defs>
+   <g class="steam"><path d="M80 62q-10-14 0-26t0-24"/><path d="M100 62q-10-14 0-26t0-24"/><path d="M120 62q-10-14 0-26t0-24"/></g>
+   <path d="M152 100h12q22 0 22 24t-24 26h-14" fill="none" stroke="#d49a67" stroke-width="7" stroke-linecap="round"/>
+   <g clip-path="url(#cup)">
+    <rect id="lCar" x="40" width="120" y="170" height="24" fill="#c58a4d"/>
+    <rect id="lCof" x="40" width="120" y="120" height="50" fill="#3b2416"/>
+    <rect id="lMil" x="40" width="120" y="80" height="40" fill="#efe0c9"/>
+   </g>
+   <path d="M46 80h108l-10 100q-3 14-18 14H74q-15 0-18-14z" fill="none" stroke="#d49a67" stroke-width="6" stroke-linejoin="round"/>
+   <ellipse cx="100" cy="208" rx="72" ry="9" fill="#d49a67" opacity=".35"/>
+  </svg>
+ </div>
+ <div>
+  <h2>Racik Kopimu</h2>
+  <p style="color:#d9c7b0">Geser untuk meracik. Kami carikan menu yang paling pas.</p>
+  <div class="sl"><b><label for="rK">Kekuatan kopi</label><output id="oK"></output></b><input id="rK" type="range" min="1" max="3" value="2"></div>
+  <div class="sl"><b><label for="rS">Susu</label><output id="oS"></output></b><input id="rS" type="range" min="0" max="3" value="1"></div>
+  <div class="sl"><b><label for="rM">Manis</label><output id="oM"></output></b><input id="rM" type="range" min="0" max="3" value="1"></div>
+  <div class="res" aria-live="polite"><h3 id="rN"></h3><p id="rD"></p><span class="price" id="rP"></span></div>
+  <button class="btn" id="rGo" type="button">Pesan racikan ini</button>
+ </div>
+</div></div></section>
+
+<section id="fasilitas"><div class="wrap">
+ <h2>Fasilitas &amp; Suasana</h2>
+ <div class="fac">
+  <div><span>📶</span>Wi-Fi gratis</div>
+  <div><span>🔌</span>Banyak colokan</div>
+  <div><span>❄️</span>Indoor ber-AC</div>
+  <div><span>🕌</span>Musholla</div>
+ </div>
+ <div class="gal" id="gal"></div>
+</div></section>
+
+<section id="pesan" style="background:var(--surface)"><div class="wrap">
+ <h2>Pesan Kopi &amp; Reservasi</h2>
+ <p class="lead">Pilih layanan di bawah, lengkapi detailnya, lalu kirim langsung ke WhatsApp admin kami.</p>
+ <div class="card" style="margin-top:20px">
+  <div class="seg" id="modeSeg" data-active="kopi" role="tablist" aria-label="Pilih layanan">
+   <span class="seg-ind" aria-hidden="true"></span>
+   <button class="seg-btn" type="button" role="tab" aria-selected="true" data-mode="kopi">🛍️ Pesan Kopi</button>
+   <button class="seg-btn" type="button" role="tab" aria-selected="false" data-mode="reservasi">🪑 Reservasi Meja</button>
+  </div>
+  <form id="form" novalidate>
+   <label>Nama
+    <input id="nama" autocomplete="name" required placeholder="Nama kamu">
+   </label>
+
+   <!-- Panel khusus Pesan Kopi -->
+   <div class="mode-panel" id="panelKopi">
+    <div>
+     <span class="field-lbl">Cara pengambilan</span>
+     <div class="opt-row" id="metodeRow" role="radiogroup" aria-label="Cara pengambilan">
+      <button type="button" class="opt" role="radio" aria-checked="true" data-val="Ambil di Kedai">Ambil di Kedai</button>
+      <button type="button" class="opt" role="radio" aria-checked="false" data-val="Kirim Kurir / Ojol">Kirim Kurir / Ojol</button>
+     </div>
+    </div>
+    <label>Detail pesanan
+     <textarea id="detail" placeholder="Contoh: 2 liter kopi susu aren, 1 liter americano (atau pilih langsung dari menu di atas)"></textarea>
+    </label>
+   </div>
+
+   <!-- Panel khusus Reservasi Meja -->
+   <div class="mode-panel" id="panelReservasi" hidden>
+    <div>
+     <span class="field-lbl">Jumlah tamu</span>
+     <div class="guest-box">
+      <div class="stepper">
+       <button type="button" id="gMin" aria-label="Kurangi jumlah tamu">−</button>
+       <span id="gVal">4 orang</span>
+       <button type="button" id="gPlus" aria-label="Tambah jumlah tamu">+</button>
+      </div>
+      <div class="opt-row" id="guestQuick">
+       <button type="button" class="opt" data-g="2">2 org</button>
+       <button type="button" class="opt" aria-checked="true" data-g="4">4 org</button>
+       <button type="button" class="opt" data-g="6">6 org</button>
+       <button type="button" class="opt" data-g="8">8 org</button>
+      </div>
+     </div>
+    </div>
+    <div>
+     <span class="field-lbl">Pilihan area</span>
+     <div class="opt-row" id="areaRow" role="radiogroup" aria-label="Pilihan area duduk">
+      <button type="button" class="opt" role="radio" aria-checked="true" data-val="Indoor (Ber-AC & banyak colokan)">Indoor (Ber-AC &amp; colokan)</button>
+      <button type="button" class="opt" role="radio" aria-checked="false" data-val="Outdoor (Teras santai)">Outdoor (Teras santai)</button>
+     </div>
+    </div>
+   </div>
+
+   <div class="row2">
+    <label><span id="tglLabel">Tanggal pengambilan</span>
+     <input id="tgl" type="date" required>
+    </label>
+    <label><span id="jamLabel">Jam pengambilan</span>
+     <input id="jam" type="time" min="08:00" max="22:00" required>
+    </label>
+   </div>
+   <label>Catatan (opsional)
+    <textarea id="catatan" placeholder="Misalnya: kurang manis, tanpa sedotan plastik"></textarea>
+   </label>
+   <div class="err" id="err" role="alert"></div>
+   <button class="btn" id="subBtn" type="submit">Kirim Pesanan ke WhatsApp</button>
+  </form>
+ </div>
+</div></section>
+
+<section id="lokasi"><div class="wrap loc">
+ <div>
+  <h2>Lokasi &amp; Jam Buka</h2>
+  <dl>
+   <dt>Alamat</dt><dd id="alamat"></dd>
+   <dt>Jam operasional</dt><dd>Senin–Minggu, 08.00–22.00</dd>
+  </dl>
+  <p style="margin-top:20px"><a class="btn" id="maps" target="_blank" rel="noopener">Buka di Google Maps</a></p>
+ </div>
+ <div class="ph" id="locPh" role="img" aria-label="Foto tampak depan kedai">Foto tampak depan kedai</div>
+</div></section>
+</main>
+
+<dialog id="mModal" aria-labelledby="mTitle">
+ <div class="m-head" id="mHead">
+  <span id="mVis">☕</span>
+  <button class="m-close" id="mClose" type="button" aria-label="Tutup detail menu">✕</button>
+ </div>
+ <div class="m-body">
+  <span class="m-tag" id="mKat"></span>
+  <h3 id="mTitle"></h3>
+  <p id="mDesc" style="color:var(--muted);font-size:.95rem;margin-bottom:8px"></p>
+  <div class="price" id="mPrice" style="font-size:1.15rem"></div>
+  <div class="m-opts" id="mOpts"></div>
+  <div class="m-act">
+   <div class="stepper">
+    <button type="button" id="mMin" aria-label="Kurangi jumlah">−</button>
+    <span id="mQty">1</span>
+    <button type="button" id="mPlus" aria-label="Tambah jumlah">+</button>
+   </div>
+   <button class="btn" id="mAdd" type="button">Tambah ke Pesanan</button>
+  </div>
+ </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<footer><div class="wrap">© <span id="yr"></span> Kopi Ruang Teduh. Seduhan lokal untuk hari yang lebih tenang.</div></footer>
+<a class="btn fab" id="fab" target="_blank" rel="noopener" aria-label="Chat WhatsApp">💬 Chat</a>
+
+<script>
+/* ====== EDIT BAGIAN INI ====== */
+var CONFIG={
+ wa:"6285775135866",                                  // nomor WhatsApp admin, format 62..., tanpa + atau 0
+ alamat:"Jl. Bahagia No. 12, Kelurahan Cilandak, Jakarta Selatan", // GANTI dengan alamat lengkap
+ maps:"https://maps.google.com/?q=Kopi+Ruang+Teduh",  // GANTI dengan tautan Google Maps kedai
+ hero:"gambar/foto-hero.jpg",                                             // contoh: "img/hero.jpg"
+ galeri:[
+  {t:"Indoor ber-AC, banyak colokan",img:"gambar/galeri-1-indoor.jpg"},
+  {t:"Area outdoor untuk santai sore",img:"gambar/galeri-2-outdoor.jpg"},
+  {t:"Sudut kerja favorit",img:"gambar/galeri-3-sudut-kerja.jpg"},
+  {t:"Bar seduh manual",img:"gambar/galeri-4-bar.jpg"}
+ ],
+ loc:"gambar/tampak-depan-lokasi.jpg"                                               // foto tampak depan
+};
+/* Harga & menu di bawah hanya CONTOH. Ganti dengan menu asli. img: "img/nama.jpg" */
+var KATEGORI=["Semua","Espresso Based","Manual Brew","Non-Coffee","Camilan/Pastry","Paket Literan"];
+var MENU=[
+ {k:"Espresso Based",n:"Espresso",d:"Pekat, aroma cokelat gelap dan karamel.",h:18000,e:"☕",img:""},
+ {k:"Espresso Based",n:"Americano",d:"Ringan, bersih, cocok untuk teman kerja.",h:20000,e:"☕",img:""},
+ {k:"Espresso Based",n:"Cafe Latte",d:"Lembut dan creamy dengan susu segar.",h:26000,e:"🥛",img:""},
+ {k:"Espresso Based",n:"Kopi Susu Aren",d:"Manis gula aren, gurih susu, kopi tetap terasa.",h:24000,e:"🧋",img:""},
+ {k:"Manual Brew",n:"V60 Gayo",d:"Floral, manis buah, tingkat asam lembut.",h:28000,e:"🫖",img:""},
+ {k:"Manual Brew",n:"V60 Toraja",d:"Body tebal, rempah, aftertaste panjang.",h:28000,e:"🫖",img:""},
+ {k:"Manual Brew",n:"Kintamani Tubruk",d:"Segar, sitrus, manis madu.",h:25000,e:"🫖",img:""},
+ {k:"Non-Coffee",n:"Cokelat Panas",d:"Cokelat pekat dengan susu hangat.",h:24000,e:"🍫",img:""},
+ {k:"Non-Coffee",n:"Matcha Latte",d:"Matcha earthy, manis seimbang.",h:27000,e:"🍵",img:""},
+ {k:"Non-Coffee",n:"Teh Tarik Rempah",d:"Teh pekat, rempah hangat, susu.",h:20000,e:"🍵",img:""},
+ {k:"Camilan/Pastry",n:"Croissant Butter",d:"Renyah di luar, lembut dan harum mentega.",h:22000,e:"🥐",img:""},
+ {k:"Camilan/Pastry",n:"Roti Bakar Cokelat",d:"Roti tebal, cokelat leleh, taburan keju.",h:20000,e:"🍞",img:""},
+ {k:"Paket Literan",n:"Kopi Susu Aren 1 Liter",d:"Espresso house blend, susu segar, dan gula aren organik. Untuk 4–5 gelas.",h:75000,e:"🥛",img:""},
+ {k:"Paket Literan",n:"Americano 1 Liter",d:"Ekstraksi ganda biji Gayo & Toraja, ringan dan segar. Untuk 4–5 gelas.",h:65000,e:"☕",img:""},
+ {k:"Paket Literan",n:"Cafe Latte 1 Liter",d:"Espresso dan susu segar yang seimbang, tanpa gula. Untuk 4–5 gelas.",h:78000,e:"☕",img:""},
+ {k:"Paket Literan",n:"Matcha Latte 1 Liter",d:"Pure matcha dengan susu segar, creamy dan tidak terlalu manis. Untuk 4–5 gelas.",h:82000,e:"🍵",img:""},
+ {k:"Paket Literan",n:"Paket Rapat Teduh",d:"1L Kopi Susu Aren + 1L Americano + 6 pcs Croissant Butter.",h:235000,e:"🍱",img:""}
+];
+/* ============================= */
+var $=function(s){return document.querySelector(s)};
+var rp=function(n){return "Rp"+n.toLocaleString("id-ID")};
+function img(src,alt){return src?'<img src="'+src+'" alt="'+alt+'" loading="lazy">':""}
+
+/* tema */
+var root=document.documentElement,tbtn=$("#theme");
+function dark(){var t=root.getAttribute("data-theme");return t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches}
+function paint(){tbtn.textContent=dark()?"☀️":"🌙"}
+try{var s=localStorage.getItem("krt-theme");if(s)root.setAttribute("data-theme",s)}catch(e){}
+paint();
+tbtn.onclick=function(){var n=dark()?"light":"dark";root.setAttribute("data-theme",n);paint();try{localStorage.setItem("krt-theme",n)}catch(e){}};
+
+/* nav mobile & interaktivitas navigasi */
+var mb=$("#menuBtn"),dr=$("#drawer"),hdr=$("#hdr");
+mb.onclick=function(){var o=dr.classList.toggle("open");mb.setAttribute("aria-expanded",o);mb.textContent=o?"✕":"☰"};
+dr.onclick=function(e){if(e.target.closest("a")){dr.classList.remove("open");mb.setAttribute("aria-expanded","false");mb.textContent="☰"}};
+
+(function(){
+ var nav=$("#nav"),pill=$("#navPill"),links=Array.from(document.querySelectorAll("#nav a, #drawer a"));
+ var deskLinks=Array.from(document.querySelectorAll("#nav a"));
+ var ids=["tentang","menu","fasilitas","pesan","lokasi"];
+ var activeHash="",hoveredLink=null,lockUntil=0;
+
+ function movePill(target){
+  deskLinks.forEach(function(a){a.classList.toggle("is-lit",a===target)});
+  if(!target||!nav.offsetParent){pill.style.opacity="0";return}
+  pill.style.width=target.offsetWidth+"px";
+  pill.style.transform="translateX("+target.offsetLeft+"px)";
+  pill.style.opacity="1";
+ }
+ function syncNav(){
+  var targetDesk=hoveredLink||deskLinks.find(function(a){return a.getAttribute("href")===activeHash})||null;
+  movePill(targetDesk);
+  links.forEach(function(a){
+   if(a.getAttribute("href")===activeHash)a.setAttribute("aria-current","location");
+   else a.removeAttribute("aria-current");
+  });
+ }
+ deskLinks.forEach(function(a){
+  a.addEventListener("pointerenter",function(){hoveredLink=a;syncNav()});
+  a.addEventListener("focus",function(){hoveredLink=a;syncNav()});
+  a.addEventListener("blur",function(){hoveredLink=null;syncNav()});
+ });
+ nav.addEventListener("pointerleave",function(){hoveredLink=null;syncNav()});
+ links.forEach(function(a){
+  a.addEventListener("click",function(){activeHash=a.getAttribute("href");lockUntil=Date.now()+750;syncNav()});
+ });
+ function onScroll(){
+  hdr.classList.toggle("scrolled",window.scrollY>12);
+  if(Date.now()<lockUntil)return;
+  var pos=window.scrollY+160,found="";
+  ids.forEach(function(id){var el=document.getElementById(id);if(el&&el.offsetTop<=pos)found="#"+id});
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-24)found="#lokasi";
+  if(found!==activeHash){activeHash=found;syncNav()}
+ }
+ window.addEventListener("scroll",onScroll,{passive:true});
+ window.addEventListener("resize",syncNav);
+ onScroll();
+})();
+
+/* hero, alamat, maps */
+if(CONFIG.hero)$("#hero").style.setProperty("--hero-img","url('"+CONFIG.hero+"')");
+$("#alamat").textContent=CONFIG.alamat;$("#maps").href=CONFIG.maps;
+$("#fab").href="https://wa.me/"+CONFIG.wa;$("#yr").textContent=new Date().getFullYear();
+if(CONFIG.loc)$("#locPh").innerHTML=img(CONFIG.loc,"Tampak depan Kopi Ruang Teduh")+'<span class="cap">Tampak depan kedai</span>';
+
+/* galeri */
+$("#gal").innerHTML=CONFIG.galeri.map(function(g){
+ return '<div class="ph" role="img" aria-label="'+g.t+'">'+(g.img?img(g.img,g.t):"")+'<span class="cap">'+g.t+'</span></div>'}).join("");
+
+/* toast notifikasi */
+var toastTimer=null;
+function showToast(msg){
+ var el=$("#toast");el.textContent=msg;el.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove("show")},2200);
+}
+
+/* mode form pemesanan & reservasi (segmented switcher) */
+var activeMode="kopi",metodeVal="Ambil di Kedai",areaVal="Indoor (Ber-AC & banyak colokan)",guestCount=4;
+function setMode(mode){
+ activeMode=mode;
+ var isRes=mode==="reservasi";
+ $("#modeSeg").setAttribute("data-active",mode);
+ document.querySelectorAll(".seg-btn").forEach(function(b){b.setAttribute("aria-selected",b.dataset.mode===mode)});
+ $("#panelKopi").hidden=isRes;
+ $("#panelReservasi").hidden=!isRes;
+ $("#tglLabel").textContent=isRes?"Tanggal kedatangan":"Tanggal pengambilan";
+ $("#jamLabel").textContent=isRes?"Jam kedatangan":"Jam pengambilan";
+ $("#catatan").placeholder=isRes?"Misalnya: meja dekat colokan, acara ulang tahun kecil":"Misalnya: kurang manis, tanpa sedotan plastik";
+ $("#subBtn").textContent=isRes?"Kirim Reservasi ke WhatsApp":"Kirim Pesanan ke WhatsApp";
+ $("#err").textContent="";
+}
+$("#modeSeg").onclick=function(e){var b=e.target.closest(".seg-btn");if(b)setMode(b.dataset.mode)};
+
+$("#metodeRow").onclick=function(e){
+ var b=e.target.closest(".opt");if(!b)return;
+ metodeVal=b.dataset.val;
+ $("#metodeRow").querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-checked",x===b)});
+};
+$("#areaRow").onclick=function(e){
+ var b=e.target.closest(".opt");if(!b)return;
+ areaVal=b.dataset.val;
+ $("#areaRow").querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-checked",x===b)});
+};
+function updateGuests(n){
+ guestCount=Math.max(1,Math.min(30,n));
+ $("#gVal").textContent=guestCount+" orang";
+ $("#guestQuick").querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-checked",+x.dataset.g===guestCount)});
+}
+$("#gMin").onclick=function(){updateGuests(guestCount-1)};
+$("#gPlus").onclick=function(){updateGuests(guestCount+1)};
+$("#guestQuick").onclick=function(e){var b=e.target.closest(".opt");if(b)updateGuests(+b.dataset.g)};
+
+/* keranjang pilihan menu + sinkron ke form WhatsApp */
+var cart=[],cartTotal=0;
+function qtyForMenu(name){
+ return cart.reduce(function(sum,it){return it.name===name?sum+it.qty:sum},0);
+}
+function addItem(name,price,note,delta){
+ var key=name+(note?" ("+note+")":"");
+ var idx=cart.findIndex(function(x){return x.key===key});
+ if(idx>-1){
+  cart[idx].qty+=delta;
+  if(cart[idx].qty<=0)cart.splice(idx,1);
+ }else if(delta>0){
+  cart.push({key:key,name:name,note:note||"",price:price,qty:delta});
+ }
+ syncCart();
+}
+function syncCart(){
+ var totalQty=0;cartTotal=0;
+ cart.forEach(function(it){totalQty+=it.qty;cartTotal+=it.price*it.qty});
+ var bar=$("#cartBar");
+ bar.classList.toggle("show",totalQty>0);
+ $("#cartCount").textContent=totalQty+" item dipilih";
+ $("#cartSub").textContent="Estimasi total: "+rp(cartTotal)+" • Otomatis terisi di formulir pesan";
+ if(totalQty>0){
+  setMode("kopi");
+  $("#detail").value=cart.map(function(it){return it.qty+"x "+it.key}).join(", ");
+ }
+ renderMenu(false);
+}
+$("#cartReset").onclick=function(){
+ cart=[];cartTotal=0;$("#cartBar").classList.remove("show");$("#detail").value="";renderMenu(false);
+};
+
+/* menu + filter + kartu interaktif */
+var aktif="Semua";
+function renderMenu(animate){
+ var list=MENU.filter(function(m){return aktif==="Semua"||m.k===aktif});
+ $("#grid").innerHTML=list.map(function(m,i){
+  var q=qtyForMenu(m.n),delay=animate===false?"":' style="animation-delay:'+Math.min(i*35,280)+'ms"';
+  var ctrl=q>0
+   ?'<div class="stepper" data-stop><button type="button" data-act="dec" data-n="'+m.n+'" aria-label="Kurangi '+m.n+'">−</button><span>'+q+'</span><button type="button" data-act="inc" data-n="'+m.n+'" aria-label="Tambah '+m.n+'">+</button></div>'
+   :'<button class="qbtn" type="button" data-stop data-act="inc" data-n="'+m.n+'">+ Tambah</button>';
+  return '<article class="item'+(q>0?' in-cart':'')+'" tabindex="0" role="button" aria-label="Lihat detail '+m.n+'" data-open="'+m.n+'"'+delay+'>'+
+   '<div class="thumb">'+(m.img?img(m.img,m.n):m.e)+'</div>'+
+   '<div class="item-body"><h3>'+m.n+'</h3><p>'+m.d+'</p>'+
+   '<div class="item-foot"><span class="price">'+rp(m.h)+'</span>'+ctrl+'</div></div></article>';
+ }).join("");
+ document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c.dataset.k===aktif)});
+}
+$("#filters").innerHTML=KATEGORI.map(function(k){
+ var c=k==="Semua"?MENU.length:MENU.filter(function(m){return m.k===k}).length;
+ return '<button class="chip" data-k="'+k+'" aria-pressed="false">'+k+'<span class="cnt">'+c+'</span></button>';
+}).join("");
+$("#filters").onclick=function(e){var c=e.target.closest(".chip");if(c){aktif=c.dataset.k;renderMenu(true)}};
+
+/* klik kartu menu & stepper */
+$("#grid").onclick=function(e){
+ var actBtn=e.target.closest("[data-act]");
+ if(actBtn){
+  var m=MENU.find(function(x){return x.n===actBtn.dataset.n});
+  if(!m)return;
+  if(actBtn.dataset.act==="inc"){addItem(m.n,m.h,"",1);showToast("✓ "+m.n+" ditambahkan")}
+  else{
+   var existing=cart.find(function(x){return x.name===m.n});
+   if(existing)addItem(existing.name,existing.price,existing.note,-1);
+  }
+  return;
+ }
+ if(e.target.closest("[data-stop]"))return;
+ var card=e.target.closest("[data-open]");
+ if(card){
+  var item=MENU.find(function(x){return x.n===card.dataset.open});
+  if(item)openMenuModal(item);
+ }
+};
+$("#grid").onkeydown=function(e){
+ if(e.key==="Enter"||e.key===" "){
+  var card=e.target.closest("[data-open]");
+  if(card&&!e.target.closest("button")){e.preventDefault();var item=MENU.find(function(x){return x.n===card.dataset.open});if(item)openMenuModal(item)}
+ }
+};
+renderMenu(true);
+
+/* popup detail & opsi menu */
+var modal=$("#mModal"),mItem=null,mQtyVal=1,mChoices={};
+function openMenuModal(item){
+ mItem=item;mQtyVal=1;mChoices={};
+ $("#mVis").innerHTML=item.img?img(item.img,item.n):item.e;
+ $("#mKat").textContent=item.k;
+ $("#mTitle").textContent=item.n;
+ $("#mDesc").textContent=item.d;
+ $("#mPrice").textContent=rp(item.h);
+ $("#mQty").textContent="1";
+
+ var groups=[];
+ if(item.k==="Espresso Based"||item.k==="Manual Brew"||item.k==="Non-Coffee"){
+  groups.push({id:"suhu",label:"Suhu penyajian",vals:["Dingin (Es)","Hangat"]});
+  groups.push({id:"gula",label:"Tingkat manis",vals:["Normal","Less Sugar","Tanpa Gula"]});
+ }else if(item.k==="Paket Literan"){
+  groups.push({id:"es",label:"Tambahan gelas & es batu",vals:["Tanpa es tambahan","Pakai cup & es terpisah"]});
+ }else{
+  groups.push({id:"hangat",label:"Penyajian",vals:["Dihangatkan","Suhu ruang"]});
+ }
+ $("#mOpts").innerHTML=groups.map(function(g){
+  mChoices[g.id]=g.vals[0];
+  return '<div><b>'+g.label+'</b><div class="opt-row" data-gid="'+g.id+'">'+
+   g.vals.map(function(v,idx){return '<button type="button" class="opt" role="radio" aria-checked="'+(idx===0)+'" data-val="'+v+'">'+v+'</button>'}).join("")+
+   '</div></div>';
+ }).join("");
+ modal.showModal();
+}
+$("#mOpts").onclick=function(e){
+ var b=e.target.closest(".opt");if(!b)return;
+ var row=b.closest("[data-gid]");
+ mChoices[row.dataset.gid]=b.dataset.val;
+ row.querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-checked",x===b)});
+};
+$("#mMin").onclick=function(){if(mQtyVal>1){mQtyVal--;$("#mQty").textContent=mQtyVal}};
+$("#mPlus").onclick=function(){mQtyVal++;$("#mQty").textContent=mQtyVal};
+$("#mAdd").onclick=function(){
+ if(!mItem)return;
+ var note=Object.keys(mChoices).map(function(k){return mChoices[k]}).join(", ");
+ addItem(mItem.n,mItem.h,note,mQtyVal);
+ showToast("✓ "+mQtyVal+"x "+mItem.n+" masuk ke pesanan");
+ modal.close();
+};
+$("#mClose").onclick=function(){modal.close()};
+modal.onclick=function(e){if(e.target===modal)modal.close()};
+
+/* cangkir Ngopi Yuk: miring mengikuti kursor, tuang, lalu ke menu */
+(function(){
+ var ng=$("#ngopi"),red=matchMedia("(prefers-reduced-motion:reduce)").matches;
+ if(!red&&matchMedia("(hover:hover) and (pointer:fine)").matches){
+  ng.addEventListener("pointermove",function(e){var r=ng.getBoundingClientRect();ng.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*18+"deg");ng.style.setProperty("--rx",-((e.clientY-r.top)/r.height-.5)*18+"deg")});
+  ng.addEventListener("pointerleave",function(){ng.style.removeProperty("--rx");ng.style.removeProperty("--ry")});
+ }
+ ng.addEventListener("click",function(e){
+  e.preventDefault();ng.classList.add("go");
+  setTimeout(function(){$("#menu").scrollIntoView({behavior:red?"auto":"smooth"});setTimeout(function(){ng.classList.remove("go")},900)},red?0:450);
+ });
+})();
+
+/* tombol hero menempel ke kursor (desktop) */
+if(matchMedia("(hover:hover) and (pointer:fine)").matches&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
+ document.querySelectorAll(".hero .btn").forEach(function(b){
+  b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect();b.style.setProperty("--mx",((e.clientX-r.left-r.width/2)*.18)+"px");b.style.setProperty("--my",((e.clientY-r.top-r.height/2)*.3)+"px")});
+  b.addEventListener("pointerleave",function(){b.style.removeProperty("--mx");b.style.removeProperty("--my")});
+ });
+}
+
+/* efek ripple saat tombol disentuh */
+document.addEventListener("pointerdown",function(e){
+ var b=e.target.closest(".btn,.chip,.icon-btn,nav a,#drawer a,.qbtn,.opt,.seg-btn");if(!b)return;
+ var r=b.getBoundingClientRect(),s=Math.max(r.width,r.height)*2,p=document.createElement("span");
+ p.className="rip";p.style.cssText="width:"+s+"px;height:"+s+"px;left:"+(e.clientX-r.left-s/2)+"px;top:"+(e.clientY-r.top-s/2)+"px";
+ b.appendChild(p);setTimeout(function(){p.remove()},600);
+});
+
+/* racik kopimu */
+(function(){
+ var K=["Ringan","Sedang","Pekat"],S=["Tanpa susu","Sedikit","Banyak","Creamy"],M=["Tanpa gula","Manis tipis","Manis","Sangat manis"],C=["#9a6a3f","#5a3820","#2a170c"];
+ var rK=$("#rK"),rS=$("#rS"),rM=$("#rM"),cur=null;
+ function pick(k,s,m){var n=s==0?(k==3?"Espresso":k==2?"Americano":"V60 Gayo"):(m>=2?"Kopi Susu Aren":"Cafe Latte");return MENU.filter(function(x){return x.n===n})[0]}
+ function upd(){
+  var k=+rK.value,s=+rS.value,m=+rM.value,H=110,B=190,car=m*7,mil=Math.round(s*.22*H),cof=H-car-mil;
+  $("#lCar").setAttribute("height",car);$("#lCar").setAttribute("y",B-car);
+  $("#lCof").setAttribute("height",cof);$("#lCof").setAttribute("y",B-car-cof);
+  $("#lMil").setAttribute("height",mil);$("#lMil").setAttribute("y",80);
+  $("#lCar").style.height=car+"px";$("#lCar").style.y=(B-car)+"px";
+  $("#lCof").style.height=cof+"px";$("#lCof").style.y=(B-car-cof)+"px";
+  $("#lMil").style.height=mil+"px";$("#lMil").style.y=(80)+"px";
+  $("#lCof").setAttribute("fill",C[k-1]);
+  $("#oK").textContent=K[k-1];$("#oS").textContent=S[s];$("#oM").textContent=M[m];
+  cur=pick(k,s,m);
+  $("#rN").textContent=cur.n;$("#rD").textContent=cur.d;$("#rP").textContent=rp(cur.h);
+  cur.pref="kopi "+K[k-1].toLowerCase()+", susu: "+S[s].toLowerCase()+", gula: "+M[m].toLowerCase();
+ }
+ [rK,rS,rM].forEach(function(i){i.oninput=upd});upd();
+ $("#rGo").onclick=function(){
+  addItem(cur.n,cur.h,cur.pref,1);
+  $("#pesan").scrollIntoView({behavior:"smooth"});
+  setTimeout(function(){$("#nama").focus({preventScroll:true})},600);
+ };
+})();
+
+/* formulir -> WhatsApp */
+(function(){
+ var z=new Date();
+ $("#tgl").min=z.getFullYear()+"-"+String(z.getMonth()+1).padStart(2,"0")+"-"+String(z.getDate()).padStart(2,"0");
+})();
+
+$("#form").onsubmit=function(e){
+ e.preventDefault();
+ var n=$("#nama").value.trim(),d=$("#detail").value.trim(),j=$("#jam").value,tg=$("#tgl").value,c=$("#catatan").value.trim();
+ var isRes=activeMode==="reservasi";
+ if(!n||(!isRes&&!d)||!tg||!j){
+  $("#err").textContent=isRes?"Lengkapi nama, tanggal, dan jam kedatangan dulu ya.":"Lengkapi nama, detail pesanan, tanggal, dan jam dulu ya.";
+  return;
+ }
+ if(tg<$("#tgl").min){$("#err").textContent="Tanggal sudah lewat. Pilih hari ini atau setelahnya.";return}
+ var p=tg.split("-"),tt=new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+ if(j<"08:00"||j>"22:00"){$("#err").textContent="Jam buka kami 08.00–22.00. Pilih jam di rentang itu.";return}
+ $("#err").textContent="";
+
+ var t="";
+ if(isRes){
+  t="Halo Kopi Ruang Teduh, saya ingin reservasi meja.\n\n"+
+   "*Nama:* "+n+"\n*Layanan:* Reservasi Meja\n*Jumlah tamu:* "+guestCount+" orang\n*Pilihan area:* "+areaVal+
+   "\n*Tanggal kedatangan:* "+tt+"\n*Jam kedatangan:* "+j.replace(":",".")+(c?"\n*Catatan:* "+c:"")+"\n\nTerima kasih!";
+ }else{
+  var est=cartTotal>0?"\n*Estimasi total:* "+rp(cartTotal):"";
+  t="Halo Kopi Ruang Teduh, saya ingin memesan kopi.\n\n"+
+   "*Nama:* "+n+"\n*Layanan:* Pesan Kopi ("+metodeVal+")\n*Detail pesanan:* "+d+est+
+   "\n*Tanggal pengambilan:* "+tt+"\n*Jam pengambilan:* "+j.replace(":",".")+(c?"\n*Catatan:* "+c:"")+"\n\nTerima kasih!";
+ }
+ window.open("https://wa.me/"+CONFIG.wa+"?text="+encodeURIComponent(t),"_blank","noopener");
+};
+</script>
+</body>
+</html>
