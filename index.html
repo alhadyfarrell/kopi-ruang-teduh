@@ -66,15 +66,15 @@ nav a:active{transform:scale(.94)}
 /* hero */
 .hero{position:relative;min-height:calc(100svh - 64px);display:flex;align-items:flex-end;color:#fff7ec;padding:0;
 background:linear-gradient(var(--hero-ov),var(--hero-ov)),var(--hero-img,none),linear-gradient(160deg,#6b4a32,#2a1d14);background-size:cover;background-position:center}
-.hero .wrap{width:100%;padding-bottom:56px;padding-top:204px}
+.hero .wrap{width:100%;padding-bottom:56px;padding-top:212px}
 @media(min-width:820px){.hero .wrap{padding-top:80px;padding-right:250px}}
 .hero h1{font-size:clamp(2.4rem,10vw,4.6rem);max-width:14ch;margin-bottom:1rem}
 .hero p{font-size:1.1rem;max-width:44ch;opacity:.92}
 .hero .btn.ghost{color:#fff7ec}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
 /* cangkir Ngopi Yuk */
-.ngopi{position:absolute;z-index:2;right:14px;top:18px;width:132px;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#fff7ec;-webkit-tap-highlight-color:transparent;cursor:pointer;transform:perspective(600px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));transition:transform .25s ease}
-@media(min-width:820px){.ngopi{width:210px;right:max(20px,calc((100% - 1040px)/2 + 20px));top:auto;bottom:64px}}
+.ngopi{position:absolute;z-index:2;left:0;right:0;top:22px;margin:0 auto;width:132px;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#fff7ec;-webkit-tap-highlight-color:transparent;cursor:pointer;transform:perspective(600px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));transition:transform .25s ease}
+@media(min-width:820px){.ngopi{left:auto;margin:0;width:210px;right:max(20px,calc((100% - 1040px)/2 + 20px));top:auto;bottom:64px}}
 .ngopi:hover,.ngopi:focus-visible{--s:1.08}
 .ngopi:active{--s:.94}
 .bubble{position:relative;margin-bottom:12px;padding:6px 16px;border-radius:999px;background:#fff7ec;color:#2a1d14;font:700 1.05rem var(--serif);white-space:nowrap;animation:bob 2.6s ease-in-out infinite;transition:background-color .2s}
